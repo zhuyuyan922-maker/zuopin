@@ -2,11 +2,13 @@
 import { useState } from "react";
 import Link from "next/link";
 
+const base = "/samplezuopinji";
+
 const videos = [
-  { file: "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
-  { file: "/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
-  { file: "/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
-  { file: "/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
+  { file: base + "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
+  { file: base + "/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
+  { file: base + "/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
+  { file: base + "/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
 ];
 
 const stats = [

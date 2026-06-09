@@ -2,12 +2,14 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const B = "/samplezuopinji";
+
 const photos = [
-  { src: "/end1.png", title: "作品一" },
-  { src: "/end3.jpg", title: "作品二" },
-  { src: "/end4.png", title: "作品三" },
-  { src: "/end5.png", title: "作品四" },
-  { src: "/end7.png", title: "作品五" },
+  { src: B + "/end1.png", title: "作品一" },
+  { src: B + "/end3.jpg", title: "作品二" },
+  { src: B + "/end4.png", title: "作品三" },
+  { src: B + "/end5.png", title: "作品四" },
+  { src: B + "/end7.png", title: "作品五" },
 ];
 
 export default function Photography() {
