@@ -24,6 +24,7 @@ const cases = [
   },
   {
     brand: "芦妈说媒",
+    vertical: true,
     label: "抖音运营案例",
     title: "相亲/情感垂类账号运营",
     desc: "代运营芦妈说媒账号，负责内容策划、视频制作与发布，账号定位相亲情感垂类赛道。",
@@ -86,8 +87,8 @@ export default function Home() {
         </div>
 
         {/* 视频区 */}
-        <div style={s.videoWrap}>
-          <div style={s.videoBox}>
+        <div style={c.vertical ? s.videoWrapV : s.videoWrap}>
+          <div style={c.vertical ? s.videoBoxV : s.videoBox}>
             <video key={v.file} src={v.file} controls style={s.video} preload="metadata" />
           </div>
           <div style={s.videoBar}>
@@ -153,6 +154,17 @@ const s: Record<string, React.CSSProperties> = {
   num: { fontSize: 22, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1 },
   lbl: { fontSize: 11, color: "#999", marginTop: 6 },
   videoWrap: { maxWidth: "100%" },
+  videoWrapV: { maxWidth: "100%", display: "flex", justifyContent: "center" },
+  videoBoxV: {
+    aspectRatio: "9/16",
+    maxHeight: 520,
+    background: "rgba(255,255,255,0.45)",
+    backdropFilter: "blur(24px) saturate(1.2)",
+    WebkitBackdropFilter: "blur(24px) saturate(1.2)",
+    borderRadius: 18, overflow: "hidden",
+    border: "1px solid rgba(255,255,255,0.7)",
+    boxShadow: "0 0.5px 0 0 rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.03)",
+  },
   videoBox: {
     aspectRatio: "16/9",
     background: "rgba(255,255,255,0.45)",
