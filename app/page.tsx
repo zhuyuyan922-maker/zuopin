@@ -38,6 +38,7 @@ const cases = [
       { file: "/zuopin/芦妈说媒运营2.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
       { file: "/zuopin/芦妈说媒运营3.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
     ],
+    images: ["/zuopin/芦妈说媒运营图片.png", "/zuopin/芦妈说媒运营图片2.png"],
   },
 ];
 
@@ -105,6 +106,15 @@ export default function Home() {
                 </div>
               </div>
             </div>
+            {(c as any).images && (
+              <div style={s.imagesCol}>
+                {(c as any).images.map((src: string) => (
+                  <div key={src} style={s.imgCard}>
+                    <img src={src} alt="" style={s.imgFit} />
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         ) : (
           <div style={s.videoWrap}>
@@ -173,8 +183,17 @@ const s: Record<string, React.CSSProperties> = {
   num: { fontSize: 22, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1 },
   lbl: { fontSize: 11, color: "#999", marginTop: 6 },
   videoWrap: { maxWidth: "100%" },
-  videoWrapV: { display: "flex", justifyContent: "center", marginBottom: 0 },
-  videoColV: { display: "flex", flexDirection: "column" as const, width: "min(340px, 65%)" },
+  videoWrapV: { display: "flex", gap: 12, alignItems: "flex-start", marginBottom: 0 },
+  videoColV: { display: "flex", flexDirection: "column" as const, width: "min(300px, 55%)", flexShrink: 0 },
+  imagesCol: { display: "flex", flexDirection: "column" as const, gap: 12, flex: 1, minWidth: 0 },
+  imgCard: {
+    borderRadius: 14, overflow: "hidden",
+    background: "rgba(255,255,255,0.55)",
+    backdropFilter: "blur(24px)", WebkitBackdropFilter: "blur(24px)",
+    border: "1px solid rgba(255,255,255,0.7)",
+    boxShadow: "0 1px 3px rgba(0,0,0,0.04), 0 4px 12px rgba(0,0,0,0.02)",
+  },
+  imgFit: { width: "100%", height: "auto", display: "block" },
   videoBoxV: {
     aspectRatio: "9/16",
     maxHeight: 520,
