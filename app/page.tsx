@@ -87,24 +87,43 @@ export default function Home() {
         </div>
 
         {/* 视频区 */}
-        <div style={c.vertical ? s.videoWrapV : s.videoWrap}>
-          <div style={c.vertical ? s.videoBoxV : s.videoBox}>
-            <video key={v.file} src={v.file} controls style={s.video} preload="metadata" />
-          </div>
-          <div style={s.videoBar}>
-            <div style={s.metrics}>
-              <span>♥ {v.likes}</span>
-              <span>💬 {v.comments}</span>
-              <span>★ {v.collects}</span>
-              <span>↗ {v.shares}</span>
+        {c.vertical ? (
+          <div style={s.videoWrapV}>
+            <div style={s.videoColV}>
+              <div style={s.videoBoxV}>
+                <video key={v.file} src={v.file} controls style={s.video} preload="metadata" />
+              </div>
+              <div style={s.videoBar}>
+                <div style={s.metrics}>
+                  <span>♥ {v.likes}</span><span>💬 {v.comments}</span>
+                  <span>★ {v.collects}</span><span>↗ {v.shares}</span>
+                </div>
+                <div style={s.arrows}>
+                  <button onClick={() => setVidIdx((vidIdx - 1 + c.videos.length) % c.videos.length)} style={s.arrowBtn}>←</button>
+                  <span style={s.page}>{vidIdx + 1} / {c.videos.length}</span>
+                  <button onClick={() => setVidIdx((vidIdx + 1) % c.videos.length)} style={s.arrowBtn}>→</button>
+                </div>
+              </div>
             </div>
-            <div style={s.arrows}>
-              <button onClick={() => setVidIdx((vidIdx - 1 + c.videos.length) % c.videos.length)} style={s.arrowBtn}>←</button>
-              <span style={s.page}>{vidIdx + 1} / {c.videos.length}</span>
-              <button onClick={() => setVidIdx((vidIdx + 1) % c.videos.length)} style={s.arrowBtn}>→</button>
+          </div>
+        ) : (
+          <div style={s.videoWrap}>
+            <div style={s.videoBox}>
+              <video key={v.file} src={v.file} controls style={s.video} preload="metadata" />
+            </div>
+            <div style={s.videoBar}>
+              <div style={s.metrics}>
+                <span>♥ {v.likes}</span><span>💬 {v.comments}</span>
+                <span>★ {v.collects}</span><span>↗ {v.shares}</span>
+              </div>
+              <div style={s.arrows}>
+                <button onClick={() => setVidIdx((vidIdx - 1 + c.videos.length) % c.videos.length)} style={s.arrowBtn}>←</button>
+                <span style={s.page}>{vidIdx + 1} / {c.videos.length}</span>
+                <button onClick={() => setVidIdx((vidIdx + 1) % c.videos.length)} style={s.arrowBtn}>→</button>
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
         <footer style={s.footer}>© 2026</footer>
       </div>
@@ -154,7 +173,8 @@ const s: Record<string, React.CSSProperties> = {
   num: { fontSize: 22, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1 },
   lbl: { fontSize: 11, color: "#999", marginTop: 6 },
   videoWrap: { maxWidth: "100%" },
-  videoWrapV: { maxWidth: "100%", display: "flex", justifyContent: "center" },
+  videoWrapV: { display: "flex", justifyContent: "center", marginBottom: 0 },
+  videoColV: { display: "flex", flexDirection: "column" as const, width: "min(340px, 65%)" },
   videoBoxV: {
     aspectRatio: "9/16",
     maxHeight: 520,
