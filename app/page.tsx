@@ -2,7 +2,7 @@
 import { useState } from "react";
 import Link from "next/link";
 
-const base = "/samplezuopinji";
+const base = "";
 
 const videos = [
   { file: base + "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
@@ -30,7 +30,6 @@ export default function Home() {
       <div style={s.wrap}>
         <nav style={s.nav}>
           <span style={s.brand}>忘机阁 · 玄中易</span>
-          <Link href="/photography" style={s.navLink}>摄影作品</Link>
         </nav>
 
         {/* 标题 */}
