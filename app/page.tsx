@@ -1,47 +1,77 @@
 "use client";
 import { useState } from "react";
-import Link from "next/link";
 
-const base = "";
-
-const videos = [
-  { file: base + "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
-  { file: base + "/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
-  { file: base + "/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
-  { file: base + "/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
-];
-
-const stats = [
-  { v: "5,552", l: "粉丝", icon: "􀉭", color: "#007AFF" },
-  { v: "7.5万+", l: "获赞", icon: "􀊰", color: "#FF3B30" },
-  { v: "150万+", l: "总曝光", icon: "􀎵", color: "#FF9500" },
-  { v: "4,000+", l: "私域用户", icon: "􀌲", color: "#34C759" },
-  { v: "3.8万", l: "APP下载", icon: "􀌁", color: "#AF52DE" },
-  { v: "236条", l: "发布内容", icon: "􀏅", color: "#5AC8FA" },
+const cases = [
+  {
+    brand: "忘机阁 · 玄中易",
+    label: "抖音运营案例",
+    title: "国学/易学垂类账号运营",
+    desc: "运营忘机阁-玄中易账号，策划内容236条，总曝光150万+，搭建私域转化链路沉淀用户4000+，APP下载量3.8万。",
+    stats: [
+      { v: "5,552", l: "粉丝", color: "#007AFF" },
+      { v: "7.5万+", l: "获赞", color: "#FF3B30" },
+      { v: "150万+", l: "总曝光", color: "#FF9500" },
+      { v: "4,000+", l: "私域用户", color: "#34C759" },
+      { v: "3.8万", l: "APP下载", color: "#AF52DE" },
+      { v: "236条", l: "发布内容", color: "#5AC8FA" },
+    ],
+    videos: [
+      { file: "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
+      { file: "/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
+      { file: "/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
+      { file: "/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
+    ],
+  },
+  {
+    brand: "芦妈说媒",
+    label: "抖音运营案例",
+    title: "相亲/情感垂类账号运营",
+    desc: "代运营芦妈说媒账号，负责内容策划、视频制作与发布，账号定位相亲情感垂类赛道。",
+    stats: [
+      { v: "代运营", l: "账号性质", color: "#007AFF" },
+      { v: "情感", l: "内容垂类", color: "#FF3B30" },
+      { v: "3条", l: "样片视频", color: "#FF9500" },
+    ],
+    videos: [
+      { file: "/芦妈说媒1.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+      { file: "/芦妈说媒运营2.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+      { file: "/芦妈说媒运营3.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+    ],
+  },
 ];
 
 export default function Home() {
-  const [idx, setIdx] = useState(0);
-  const v = videos[idx];
+  const [caseIdx, setCaseIdx] = useState(0);
+  const [vidIdx, setVidIdx] = useState(0);
+  const c = cases[caseIdx];
+  const v = c.videos[vidIdx];
+
+  function switchCase(dir: number) {
+    setCaseIdx((caseIdx + dir + cases.length) % cases.length);
+    setVidIdx(0);
+  }
 
   return (
     <main style={s.main}>
-      {/* 导航 */}
       <div style={s.wrap}>
+        {/* 导航 */}
         <nav style={s.nav}>
-          <span style={s.brand}>忘机阁 · 玄中易</span>
+          <span style={s.brand}>{c.brand}</span>
+          <div style={s.caseNav}>
+            <button onClick={() => switchCase(-1)} style={s.caseBtn}>←</button>
+            <span style={s.casePage}>{caseIdx + 1} / {cases.length}</span>
+            <button onClick={() => switchCase(1)} style={s.caseBtn}>→</button>
+          </div>
         </nav>
 
         {/* 标题 */}
-        <p style={s.label}>抖音运营案例</p>
-        <h1 style={s.h1}>国学/易学垂类账号运营</h1>
-        <p style={s.desc}>
-          运营忘机阁-玄中易账号，策划内容236条，总曝光150万+，搭建私域转化链路沉淀用户4000+，APP下载量3.8万。
-        </p>
+        <p style={s.label}>{c.label}</p>
+        <h1 style={s.h1}>{c.title}</h1>
+        <p style={s.desc}>{c.desc}</p>
 
-        {/* Apple 风数据卡片 */}
+        {/* 数据卡片 */}
         <div style={s.cardGrid}>
-          {stats.map((item) => (
+          {c.stats.map((item) => (
             <div key={item.l} style={s.card}>
               <div style={{ ...s.iconCircle, background: item.color + "12" }}>
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -55,7 +85,7 @@ export default function Home() {
           ))}
         </div>
 
-        {/* 视频区 — 与卡片同宽 */}
+        {/* 视频区 */}
         <div style={s.videoWrap}>
           <div style={s.videoBox}>
             <video key={v.file} src={v.file} controls style={s.video} preload="metadata" />
@@ -68,9 +98,9 @@ export default function Home() {
               <span>↗ {v.shares}</span>
             </div>
             <div style={s.arrows}>
-              <button onClick={() => setIdx((idx - 1 + videos.length) % videos.length)} style={s.arrowBtn}>←</button>
-              <span style={s.page}>{idx + 1} / {videos.length}</span>
-              <button onClick={() => setIdx((idx + 1) % videos.length)} style={s.arrowBtn}>→</button>
+              <button onClick={() => setVidIdx((vidIdx - 1 + c.videos.length) % c.videos.length)} style={s.arrowBtn}>←</button>
+              <span style={s.page}>{vidIdx + 1} / {c.videos.length}</span>
+              <button onClick={() => setVidIdx((vidIdx + 1) % c.videos.length)} style={s.arrowBtn}>→</button>
             </div>
           </div>
         </div>
@@ -91,24 +121,27 @@ const s: Record<string, React.CSSProperties> = {
   wrap: { maxWidth: 820, margin: "0 auto", padding: "0 20px" },
   nav: { display: "flex", justifyContent: "space-between", alignItems: "center", padding: "16px 0" },
   brand: { fontSize: 13, fontWeight: 600, letterSpacing: "-0.01em" },
-  navLink: { fontSize: 13, color: "#86868b", textDecoration: "none" },
+  caseNav: { display: "flex", alignItems: "center", gap: 6 },
+  caseBtn: {
+    width: 28, height: 28, borderRadius: 14, border: "none",
+    background: "rgba(255,255,255,0.55)", backdropFilter: "blur(12px)", WebkitBackdropFilter: "blur(12px)",
+    fontSize: 12, color: "#666", cursor: "pointer",
+    boxShadow: "0 0.5px 1px rgba(0,0,0,0.04)",
+  },
+  casePage: { fontSize: 11, color: "#86868b", fontWeight: 500, minWidth: 28, textAlign: "center" },
   label: { fontSize: 11, fontWeight: 500, letterSpacing: 2.5, color: "#86868b", textTransform: "uppercase", marginBottom: 10, marginTop: 28 },
   h1: { fontSize: 32, fontWeight: 600, lineHeight: 1.15, letterSpacing: "-0.025em", marginBottom: 12, marginTop: 0 },
   desc: { fontSize: 15, color: "#86868b", lineHeight: 1.6, marginBottom: 42, maxWidth: 420 },
-
-  // 卡片网格
   cardGrid: {
     display: "grid",
     gridTemplateColumns: "repeat(auto-fill, minmax(115px, 1fr))",
-    gap: 12,
-    marginBottom: 12,
+    gap: 12, marginBottom: 12,
   },
   card: {
     background: "rgba(255,255,255,0.55)",
     backdropFilter: "blur(24px) saturate(1.2)",
     WebkitBackdropFilter: "blur(24px) saturate(1.2)",
-    borderRadius: 18,
-    padding: "20px 16px 18px",
+    borderRadius: 18, padding: "20px 16px 18px",
     border: "1px solid rgba(255,255,255,0.7)",
     boxShadow: "0 0.5px 0 0 rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03), 0 3px 8px rgba(0,0,0,0.02)",
   },
@@ -119,16 +152,13 @@ const s: Record<string, React.CSSProperties> = {
   },
   num: { fontSize: 22, fontWeight: 600, letterSpacing: "-0.02em", lineHeight: 1 },
   lbl: { fontSize: 11, color: "#999", marginTop: 6 },
-
-  // 视频区
   videoWrap: { maxWidth: "100%" },
   videoBox: {
     aspectRatio: "16/9",
     background: "rgba(255,255,255,0.45)",
     backdropFilter: "blur(24px) saturate(1.2)",
     WebkitBackdropFilter: "blur(24px) saturate(1.2)",
-    borderRadius: 18,
-    overflow: "hidden",
+    borderRadius: 18, overflow: "hidden",
     border: "1px solid rgba(255,255,255,0.7)",
     boxShadow: "0 0.5px 0 0 rgba(0,0,0,0.04), 0 2px 4px rgba(0,0,0,0.03), 0 6px 16px rgba(0,0,0,0.03)",
   },
