@@ -16,10 +16,10 @@ const cases = [
       { v: "236条", l: "发布内容", color: "#5AC8FA" },
     ],
     videos: [
-      { file: "/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
-      { file: "/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
-      { file: "/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
-      { file: "/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
+      { file: "/zuopin/guoxue.mp4", likes: "87", comments: "5", collects: "23", shares: "6" },
+      { file: "/zuopin/tiangan.mp4", likes: "274", comments: "49", collects: "68", shares: "17" },
+      { file: "/zuopin/jing.mp4", likes: "3,299", comments: "392", collects: "680", shares: "709" },
+      { file: "/zuopin/mbti.mp4", likes: "733", comments: "17", collects: "86", shares: "47" },
     ],
   },
   {
@@ -33,9 +33,9 @@ const cases = [
       { v: "3条", l: "样片视频", color: "#FF9500" },
     ],
     videos: [
-      { file: "/芦妈说媒1.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
-      { file: "/芦妈说媒运营2.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
-      { file: "/芦妈说媒运营3.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+      { file: "/zuopin/芦妈说媒1.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+      { file: "/zuopin/芦妈说媒运营2.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
+      { file: "/zuopin/芦妈说媒运营3.mp4", likes: "—", comments: "—", collects: "—", shares: "—" },
     ],
   },
 ];
